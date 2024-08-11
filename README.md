@@ -12,12 +12,17 @@ Feng T, Chen X, Wu S, Zhou H and Fang Z. "Predicting the bacterial host range of
 
 ## Requires
 + Python >= 3.6.15
++ hmmer >= 3.3.2
 + numpy >= 1.19.5
++ perl >= 5.26.2
++ biopython >= 1.79
 
 ## Dependencies
++ jellyfish >= 2.2.10
 + prokka >= 1.14.6
 + r-base >= 4.2.2
 + r-e1071 >= 1.7_13
++ r-dplyr >= 1.1.0
 
 ## Preparation
 HRPredict is developed using some dependencies, and we recommend using conda to install them.
@@ -33,7 +38,6 @@ HRPredict is developed using some dependencies, and we recommend using conda to 
 % conda install bioconda::prokka
 % conda install r-base
 % conda install r-e1071
-%
 ```
 
 ## Installation
@@ -51,7 +55,7 @@ Clone this repository to your local linux PC.
 % python3 HRPredict.py -i ./test/test.fasta -m ./model/ -r ./reference/ -o .
 ```
 
-# Output files
+# Output file
 | File | Description |
 | ------------ | ------------ |
 | input_plasmid_host_range.tsv | This file contians the predicted host range of each plasmid |
