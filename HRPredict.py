@@ -174,8 +174,7 @@ def host_range_predict(model_dir, ref_dir, output_dir, output):
     cutoff_G = "{}{}".format(model_dir, "cutoff_Genus.tsv")
     cutoff_S = "{}{}".format(model_dir, "cutoff_Species.tsv")
 
-    #os.system("conda activate randomR")
-    #os.system("Rscript {} {} {} {} {} {} {}".format(rscirpt, model_dir, cutoff_F, cutoff_G, cutoff_S, input_d, output_dir))
+    os.system("Rscript {} {} {} {} {} {} {}".format(rscirpt, model_dir, cutoff_F, cutoff_G, cutoff_S, input_d, output_dir))
 
     lineage = model_lineage_get(model_dir)
 
@@ -269,7 +268,7 @@ def plasmid_host_range_predict(fasta, model_dir, ref_dir, output_dir):
     fa_dir = "{}fasta".format(output_dir)
     fa_dir = dir_check(fa_dir)
     acc_list = accession_id_get(fasta, fa_dir)
-    #plasmid_embedding_generate(acc_list, ref_dir, prot_vec, fa_dir, output_dir)
+    plasmid_embedding_generate(acc_list, ref_dir, prot_vec, fa_dir, output_dir)
     host_range_predict(model_dir, ref_dir, output_dir, output)
     output.close()
 
