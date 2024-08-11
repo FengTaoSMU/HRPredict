@@ -5,6 +5,8 @@
 # Function: Reference distance matrix generation
 #-----------------------------------------------
 
+# 'prokka /data3/Group7/fengtao/2.MOBFinder/1.plasmid/01.complete_fasta/CP100462.1.fasta --outdir ./test --prefix NZ_CP050157.1 --kingdom Bacteria'
+
 from Bio import SeqIO
 import argparse
 import re, os, copy
@@ -172,7 +174,8 @@ def host_range_predict(model_dir, ref_dir, output_dir, output):
     cutoff_G = "{}{}".format(model_dir, "cutoff_Genus.tsv")
     cutoff_S = "{}{}".format(model_dir, "cutoff_Species.tsv")
 
-    os.system("Rscript {} {} {} {} {} {} {}".format(rscirpt, model_dir, cutoff_F, cutoff_G, cutoff_S, input_d, output_dir))
+    #os.system("conda activate randomR")
+    #os.system("Rscript {} {} {} {} {} {} {}".format(rscirpt, model_dir, cutoff_F, cutoff_G, cutoff_S, input_d, output_dir))
 
     lineage = model_lineage_get(model_dir)
 
@@ -218,10 +221,12 @@ def host_range_predict(model_dir, ref_dir, output_dir, output):
                         if line[item] == "No":
                             list_remove, list_new = [], []
                             for unit in result_dic[line_id]:
-                                if header[item] in unit:
-                                    f_keep = unit.split(',')[0]
-                                    list_new.append(f_keep)
-                                    list_remove.append(unit)
+                                genus_list = unit.split(',')
+                                if len(genus_list) >= 2:
+                                    if header[item] in genus_list[1]:
+                                        f_keep = genus_list[0]
+                                        list_new.append(f_keep)
+                                        list_remove.append(unit)
                             result_dic[line_id] = list(set(result_dic[line_id]) - set(list_remove))
                             result_dic[line_id] = list(set(result_dic[line_id] + list_new))
 
@@ -241,13 +246,14 @@ def host_range_predict(model_dir, ref_dir, output_dir, output):
                         if line[item] == "No":
                             list_remove, list_new = [], []
                             for unit in result_dic[line_id]:
-                                if header[item] in unit:
-                                    g_keep = unit.split(',')[:2]
-                                    list_new.append(','.join(g_keep))
-                                    list_remove.append(unit)
+                                species_list = unit.split(',')
+                                if len(species_list) >= 3:
+                                    if header[item] in species_list[2]:
+                                        g_keep = ','.join([species_list[0], species_list[1]])
+                                        list_new.append(g_keep)
+                                        list_remove.append(unit)
                             result_dic[line_id] = list(set(result_dic[line_id]) - set(list_remove))
                             result_dic[line_id] = list(set(result_dic[line_id] + list_new))
-
     for pid in result_dic:
         if result_dic[pid]:
             output.write("{}\t{}\n".format(pid,'|'.join(result_dic[pid])))
@@ -263,7 +269,7 @@ def plasmid_host_range_predict(fasta, model_dir, ref_dir, output_dir):
     fa_dir = "{}fasta".format(output_dir)
     fa_dir = dir_check(fa_dir)
     acc_list = accession_id_get(fasta, fa_dir)
-    plasmid_embedding_generate(acc_list, ref_dir, prot_vec, fa_dir, output_dir)
+    #plasmid_embedding_generate(acc_list, ref_dir, prot_vec, fa_dir, output_dir)
     host_range_predict(model_dir, ref_dir, output_dir, output)
     output.close()
 
