@@ -61,8 +61,8 @@ Clone this repository to your local linux PC.
 | input_plasmid_host_range.tsv | This file contians the predicted host range of each plasmid |
 
 # Output file format
-| field  | Description |
-| --------- |  --------- | 
+| field | Description |
+| :---------: | :---------: | 
 | id | Plasmid id |
 | host_range | Predicted host ranges of each plasmid |
 
