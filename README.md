@@ -35,7 +35,7 @@ HRPredict is developed using some dependencies, and we recommend using conda to 
 % conda create -n HRPredict
 % conda activate HRPredict
 % conda install python
-% conda install bioconda::prokka
+% conda install -c bioconda prokka
 % conda install r-base
 % conda install r-e1071
 ```
