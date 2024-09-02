@@ -39,6 +39,7 @@ HRPredict is developed using some dependencies, and we recommend using conda to 
 % conda install r-base
 % conda install r-e1071
 % conda install r-dplyr
+% conda install biopython
 ```
 
 ## Installation
