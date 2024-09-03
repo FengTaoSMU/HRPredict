@@ -5,6 +5,8 @@
 # Function: Reference distance matrix generation
 #-----------------------------------------------
 
+# 'prokka /data3/Group7/fengtao/2.MOBFinder/1.plasmid/01.complete_fasta/CP100462.1.fasta --outdir ./test --prefix NZ_CP050157.1 --kingdom Bacteria'
+
 from Bio import SeqIO
 import argparse
 import re, os, copy
@@ -253,12 +255,22 @@ def host_range_predict(model_dir, ref_dir, output_dir, output):
                             result_dic[line_id] = list(set(result_dic[line_id] + list_new))
     for pid in result_dic:
         if result_dic[pid]:
-            output.write("{}\t{}\n".format(pid,'|'.join(result_dic[pid])))
+            output.write("{}".format(pid))
+            host_range = sorted(result_dic[pid])
+            for host in host_range:
+                host_list = host.split(',')
+                if len(host_list) == 3:
+                    output.write("\tf__{};g__{};s__{}".format(host_list[0], host_list[1], host_list[2]))
+                elif len(host_list) == 2:
+                    output.write("\tf__{};g__{}".format(host_list[0], host_list[1]))
+                else:
+                    output.write("\tf__{}".format(host_list[0]))
+            output.write("\n")
         else:
             output.write("{}\n".format(pid))
 
 def plasmid_host_range_predict(fasta, model_dir, ref_dir, output_dir):
-    output = open("{}{}".format(output_dir, "input_plasmid_host_range.tsv"), 'w')
+    output = open("{}{}".format(output_dir, "plasmid_host_range.tsv"), 'w')
     output_dir = "{}{}/".format(output_dir, "tmp")
     output_dir = dir_check(output_dir)
     prot_vector = "{}{}".format(ref_dir, "protvec.txt")
@@ -269,6 +281,7 @@ def plasmid_host_range_predict(fasta, model_dir, ref_dir, output_dir):
     plasmid_embedding_generate(acc_list, ref_dir, prot_vec, fa_dir, output_dir)
     host_range_predict(model_dir, ref_dir, output_dir, output)
     output.close()
+    os.system("rm -rf {}".format(output_dir))
 
 def main():
     input_fasta, model_dir, ref_dir, output_dir = parameter_passing()
