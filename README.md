@@ -60,7 +60,7 @@ Clone this repository to your local linux PC.
 # Output file
 | File | Description |
 | ------------ | ------------ |
-| input_plasmid_host_range.tsv | This file contians the predicted host range of each plasmid |
+| plasmid_host_range.tsv | This file contians the predicted host range of each plasmid |
 
 # Output file format
 | field | Description |
