@@ -2,10 +2,9 @@
 #-----------------------------------------------
 # Software: HRPredict
 # Author: FengTaoSMU
-# Function: Reference distance matrix generation
+# Function: Host range prediction
 #-----------------------------------------------
 
-# 'prokka /data3/Group7/fengtao/2.MOBFinder/1.plasmid/01.complete_fasta/CP100462.1.fasta --outdir ./test --prefix NZ_CP050157.1 --kingdom Bacteria'
 
 from Bio import SeqIO
 import argparse
