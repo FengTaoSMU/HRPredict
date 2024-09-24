@@ -53,7 +53,6 @@ Clone this repository to your local linux PC.
 
 ```
 # input: Plasmid complete fasta file with unique id
-# output: input_plasmid_host_range.tsv
 % python3 HRPredict.py -i ./test/test.fasta -m ./model/ -r ./reference/ -o .
 ```
 
