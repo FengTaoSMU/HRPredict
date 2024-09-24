@@ -2,7 +2,7 @@
 #-----------------------------------------------
 # Software: HRPredict
 # Author: FengTaoSMU
-# Function: Host range prediction
+# Function: Host range prediction for plasmid
 #-----------------------------------------------
 
 
