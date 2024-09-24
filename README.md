@@ -60,13 +60,15 @@ Clone this repository to your local linux PC.
 # Output file
 | File | Description |
 | ------------ | ------------ |
-| plasmid_host_range.tsv | This file contians the predicted host range of each plasmid |
+| HostRange_Family.tsv | This file contians the predicted host range of each plasmid at family level |
+| HostRange_Genus.tsv | This file contians the predicted host range of each plasmid at genus level |
+| HostRange_Species.tsv | This file contians the predicted host range of each plasmid at species level |
 
 # Output file format
 | field | Description |
 | :---------: | :---------: | 
 | id | Plasmid id |
-| host_range | Predicted host ranges of each plasmid |
+| host_range | Predicted host ranges of each plasmid at different level |
 
 ## Contact
 Tao Feng - fengtaosmu@foxmail.com
