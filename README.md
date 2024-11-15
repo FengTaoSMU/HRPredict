@@ -39,11 +39,13 @@ HRPredict is developed using some dependencies, and we recommend using conda to 
 
 ```
 # create the environment using configured yaml file
+
 % conda env create -f environment.yaml
 ```
 
 ```
 # Manually create the conda environment
+
 % conda create -n HRPredict
 % conda activate HRPredict
 % conda install conda-forge::r-base
