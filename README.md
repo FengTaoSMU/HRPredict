@@ -27,11 +27,20 @@ Feng T, Chen X, Wu S, Zhou H and Fang Z. "Predicting the bacterial host range of
 ## Preparation
 HRPredict is developed using some dependencies, and we recommend using conda to install them.
 
+### Step 1: add channels
 ```
 % conda config --add channels defaults
 % conda config --add channels conda-forge
 % conda config --add channels bioconda
+```
 
+### Step 2: create conda environment
+
+```
+% conda env create -f environment.yaml
+```
+
+```
 % conda create -n HRPredict
 % conda activate HRPredict
 % conda install -c bioconda prokka
