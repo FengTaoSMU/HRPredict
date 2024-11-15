@@ -11,18 +11,19 @@ Consequently, existing methods may significantly underestimate the host ranges o
 Feng T, Chen X, Wu S, Zhou H and Fang Z. "Predicting the bacterial host range of plasmid genomes using the language model-based one-class SVM algorithm."
 
 ## Requires
-+ Python >= 3.6.15
-+ hmmer >= 3.3.2
-+ numpy >= 1.19.5
-+ perl >= 5.26.2
-+ biopython >= 1.79
++ biopython >= 1.78
++ prokka >= 1.14.6
++ Python >= 3.9.19
++ r-base >= 4.3.3
 
 ## Dependencies
++ bioconductor-biocparallel >= 1.36.0
 + jellyfish >= 2.2.10
-+ prokka >= 1.14.6
-+ r-base >= 4.2.2
-+ r-e1071 >= 1.7_13
++ r-caret >= 6.0_94
 + r-dplyr >= 1.1.0
++ r-e1071 >= 1.7_13
++ r-rocr >= 1.0_11
++ r-stringr >= 1.5.1
 
 ## Preparation
 HRPredict is developed using some dependencies, and we recommend using conda to install them.
@@ -43,12 +44,17 @@ HRPredict is developed using some dependencies, and we recommend using conda to 
 ```
 % conda create -n HRPredict # Manually create the conda environment
 % conda activate HRPredict
-% conda install -c bioconda prokka
-% conda install python
-% conda install r-base
-% conda install r-e1071
-% conda install r-dplyr
+% conda install conda-forge::r-base
+% conda install bioconda::bioconductor-biocparallel
+% conda install conda-forge::r-caret
+% conda install conda-forge::r-dplyr
+% conda install conda-forge::r-e1071
+% conda install conda-forge::r-stringr
+% conda install r::r-rocr
+% conda install bioconda::prokka
+% conda install anaconda::python
 % conda install biopython
+% conda install bioconda::jellyfish
 ```
 
 ## Installation
