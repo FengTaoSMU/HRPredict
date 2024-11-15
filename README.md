@@ -37,11 +37,11 @@ HRPredict is developed using some dependencies, and we recommend using conda to 
 ### Step 2: create conda environment
 
 ```
-% conda env create -f environment.yaml
+% conda env create -f environment.yaml  # create the environment using configured yaml file
 ```
 
 ```
-% conda create -n HRPredict
+% conda create -n HRPredict # Manually create the conda environment
 % conda activate HRPredict
 % conda install -c bioconda prokka
 % conda install python
