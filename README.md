@@ -13,7 +13,7 @@ Feng T, Chen X, Wu S, Zhou H and Fang Z. "Predicting the bacterial host range of
 ## Requires
 + biopython >= 1.78
 + prokka >= 1.14.6
-+ Python >= 3.9.19
++ python >= 3.9.19
 + r-base >= 4.3.3
 
 ## Dependencies
