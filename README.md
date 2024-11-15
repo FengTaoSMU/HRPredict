@@ -38,11 +38,13 @@ HRPredict is developed using some dependencies, and we recommend using conda to 
 ### Step 2: create conda environment
 
 ```
-% conda env create -f environment.yaml  # create the environment using configured yaml file
+# create the environment using configured yaml file
+% conda env create -f environment.yaml
 ```
 
 ```
-% conda create -n HRPredict # Manually create the conda environment
+# Manually create the conda environment
+% conda create -n HRPredict
 % conda activate HRPredict
 % conda install conda-forge::r-base
 % conda install bioconda::bioconductor-biocparallel
