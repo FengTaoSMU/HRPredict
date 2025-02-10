@@ -24,7 +24,7 @@ Feng T, Chen X, Wu S, Zhou H and Fang Z. "Predicting the bacterial host range of
 + r-e1071 >= 1.7_13
 + r-rocr >= 1.0_11
 + r-stringr >= 1.5.1
-+ pandas
++ pandas >= 2.2.3
 
 ## Preparation
 HRPredict is developed using some dependencies, and we recommend using conda to install them.
