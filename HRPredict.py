@@ -2,14 +2,16 @@
 #-----------------------------------------------
 # Software: HRPredict
 # Author: FengTaoSMU
-# Function: Host range prediction for plasmid
+# Function: Reference distance matrix generation
 #-----------------------------------------------
 
+# 'prokka /data3/Group7/fengtao/2.MOBFinder/1.plasmid/01.complete_fasta/CP100462.1.fasta --outdir ./test --prefix NZ_CP050157.1 --kingdom Bacteria'
 
 from Bio import SeqIO
 import argparse
 import re, os, copy
 import numpy as np
+import pandas as pd
 
 def parameter_passing():
     usage = 'python3 %(prog)s [-h] [-i input_fasta] [-m model_dir] [-r reference_dir] [-o output_dir]'
@@ -157,18 +159,59 @@ def lineage_get(input_lineage):
             lineage.append(line.strip().split(','))
     return lineage
 
-def host_range_output(result_dic, output):
-    for pid in result_dic:
-        output.write("{}".format(pid))
-        if result_dic[pid]:
-            hr_list = sorted(result_dic[pid])
-            for host in hr_list:
-                output.write("\t{}".format(host))
-        output.write("\n")
+def host_range_output(result_dic, output, prob_F, prob_G, prob_S, lineageF, lineageG, lineageS, result_level):
+    FP_df = pd.read_csv(prob_F, delimiter=',')
+    GP_df = pd.read_csv(prob_G, delimiter=',')
+    SP_df = pd.read_csv(prob_S, delimiter=',')
+
+    g_dic = {}
+    s_dic = {}
+    for h_index in range(len(lineageG)):
+        g_dic[lineageG[h_index][1]] = lineageG[h_index][0]
+
+    for h_index in range(len(lineageS)):
+        s_dic[lineageS[h_index][2]] = [lineageS[h_index][0], lineageS[h_index][1]]
+        g_dic[lineageS[h_index][1]] = lineageS[h_index][0]
+
+    if result_level == 'F':
+        for pid in result_dic:
+            output.write("{}".format(pid))
+            if result_dic[pid]:
+                hr_list = sorted(result_dic[pid])
+                for host in hr_list:
+                    output.write("\tf__{}({})".format(host, round(FP_df.loc[pid, host], 2)))
+            else:
+                output.write("\tNo family was predicted")
+            output.write("\n")
+
+    elif result_level == 'G':
+        for pid in result_dic:
+            output.write("{}".format(pid))
+            if result_dic[pid]:
+                hr_list = sorted(result_dic[pid])
+                for host in hr_list:
+                    output.write("\tf__{}({})".format(g_dic[host], round(FP_df.loc[pid, g_dic[host]], 2)))
+                    output.write(";g__{}({})".format(host, round(GP_df.loc[pid, host], 2)))
+            else:
+                output.write("\tNo genus was predicted")
+            output.write("\n")
+
+    else:
+        for pid in result_dic:
+            output.write("{}".format(pid))
+            if result_dic[pid]:
+                hr_list = sorted(result_dic[pid])
+                for host in hr_list:
+                    output.write("\tf__{}({})".format(s_dic[host][0], round(FP_df.loc[pid, s_dic[host][0]], 2)))
+                    output.write(";g__{}({})".format(s_dic[host][1], round(GP_df.loc[pid, s_dic[host][1]], 2)))
+                    output.write(";s__{}({})".format(host, round(SP_df.loc[pid, host], 2)))
+            else:
+                output.write("\tNo species was predicted")
+            output.write("\n")
 
 def host_range_predict(model_dir, ref_dir, tmp_dir, output_dir):
     input_d = "{}{}".format(tmp_dir, "protein_feature_matrix.tsv")
-    rscirpt = "{}{}".format(model_dir, "HRPredict.R")
+    rscirpt = "{}{}".format(model_dir, "HRPredict_v3.R")
 
     cutoff_F = "{}{}".format(model_dir, "cutoff_Family.tsv")
     cutoff_G = "{}{}".format(model_dir, "cutoff_Genus.tsv")
@@ -179,6 +222,10 @@ def host_range_predict(model_dir, ref_dir, tmp_dir, output_dir):
     lineageF = lineage_get("{}{}".format(model_dir, "lineage_Family.tsv"))
     lineageG = lineage_get("{}{}".format(model_dir, "lineage_Genus.tsv"))
     lineageS = lineage_get("{}{}".format(model_dir, "lineage_Species.tsv"))
+
+    prob_F = "{}{}".format(tmp_dir, "prob_result_family.tsv")
+    prob_G = "{}{}".format(tmp_dir, "prob_result_genus.tsv")
+    prob_S = "{}{}".format(tmp_dir, "prob_result_species.tsv")
 
     result_F = "{}{}".format(tmp_dir, "result_family.tsv")
     result_G = "{}{}".format(tmp_dir, "result_genus.tsv")
@@ -255,9 +302,9 @@ def host_range_predict(model_dir, ref_dir, tmp_dir, output_dir):
     output_G = open("{}{}".format(output_dir, "HostRange_Genus.tsv"), 'w')
     output_S = open("{}{}".format(output_dir, "HostRange_Species.tsv"), 'w')
 
-    host_range_output(result_F_dic, output_F)
-    host_range_output(result_G_dic, output_G)
-    host_range_output(result_S_dic, output_S)
+    host_range_output(result_F_dic, output_F, prob_F, prob_G, prob_S, lineageF, lineageG, lineageS, 'F')
+    host_range_output(result_G_dic, output_G, prob_F, prob_G, prob_S, lineageF, lineageG, lineageS, 'G')
+    host_range_output(result_S_dic, output_S, prob_F, prob_G, prob_S, lineageF, lineageG, lineageS, 'S')
 
     output_F.close()
     output_G.close()
