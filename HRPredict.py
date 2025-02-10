@@ -165,10 +165,10 @@ def host_range_output(result_dic, output, prob_F, prob_G, prob_S, lineageF, line
     SP_df = pd.read_csv(prob_S, delimiter=',')
 
     g_dic = {}
-    s_dic = {}
     for h_index in range(len(lineageG)):
         g_dic[lineageG[h_index][1]] = lineageG[h_index][0]
 
+    s_dic = {}
     for h_index in range(len(lineageS)):
         s_dic[lineageS[h_index][2]] = [lineageS[h_index][0], lineageS[h_index][1]]
         g_dic[lineageS[h_index][1]] = lineageS[h_index][0]
