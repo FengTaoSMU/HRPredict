@@ -80,20 +80,20 @@ Clone this repository to your local linux PC.
 % python3 HRPredict.py -i ./test/test.fasta -m ./model/ -r ./reference/ -o .
 ```
 
-# Output file
+## Output file
 | File | Description |
 | ------------ | ------------ |
 | HostRange_Family.tsv | This file contians the predicted host range of each plasmid at family level |
 | HostRange_Genus.tsv | This file contians the predicted host range of each plasmid at genus level |
 | HostRange_Species.tsv | This file contians the predicted host range of each plasmid at species level |
 
-# Output file format
+## Output file format
 | field | Description |
 | :---------: | :---------: | 
 | id | Plasmid id |
 | host_range | Predicted host ranges of each plasmid at different level |
 
-# Output example
+## Output example
 | ID | Predicted host range with decision value (SVM) |
 | :---------: | :---------: | 
 | NZ_CP122477.1 | f__Enterobacteriaceae(1.01);g__Enterobacter(0.03);s__Enterobacter_hormaechei(-0.01)	f__Enterobacteriaceae(1.01);g__Salmonella(0.06);s__Salmonella_enterica(0.07)	f__Enterobacteriaceae(1.01);g__Shigella(0.02);s__Shigella_flexneri(0.01) |
