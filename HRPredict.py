@@ -211,7 +211,7 @@ def host_range_output(result_dic, output, prob_F, prob_G, prob_S, lineageF, line
 
 def host_range_predict(model_dir, ref_dir, tmp_dir, output_dir):
     input_d = "{}{}".format(tmp_dir, "protein_feature_matrix.tsv")
-    rscirpt = "{}{}".format(model_dir, "HRPredict_v3.R")
+    rscirpt = "{}{}".format(model_dir, "HRPredict.R")
 
     cutoff_F = "{}{}".format(model_dir, "cutoff_Family.tsv")
     cutoff_G = "{}{}".format(model_dir, "cutoff_Genus.tsv")
