@@ -1,7 +1,7 @@
 # Predicting the bacterial host range of plasmid genomes using the language model-based one-class SVM algorithm
 
 ## Change logs
-2025.02.10 The ReADME.md was updated with a few modification.
+2025.02.10 The README.md was updated with a few modification.
 
 ## Introduction
 The prediction of the plasmid host range is crucial for investigating the dissemination of plasmids and the transfer of resistance and virulence genes mediated by plasmids.
@@ -94,7 +94,7 @@ Clone this repository to your local linux PC.
 | host_range | Predicted host ranges of each plasmid at different level |
 
 # Output example
-| ID | Predicted host range |
+| ID | Predicted host range with decision value (SVM) |
 | :---------: | :---------: | 
 | NZ_CP122477.1 | f__Enterobacteriaceae(1.01);g__Enterobacter(0.03);s__Enterobacter_hormaechei(-0.01)	f__Enterobacteriaceae(1.01);g__Salmonella(0.06);s__Salmonella_enterica(0.07)	f__Enterobacteriaceae(1.01);g__Shigella(0.02);s__Shigella_flexneri(0.01) |
 | NC_005970.1 | No species was predicted |
