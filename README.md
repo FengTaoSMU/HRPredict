@@ -24,6 +24,7 @@ Feng T, Chen X, Wu S, Zhou H and Fang Z. "Predicting the bacterial host range of
 + r-e1071 >= 1.7_13
 + r-rocr >= 1.0_11
 + r-stringr >= 1.5.1
++ pandas
 
 ## Preparation
 HRPredict is developed using some dependencies, and we recommend using conda to install them.
@@ -59,6 +60,7 @@ HRPredict is developed using some dependencies, and we recommend using conda to 
 % conda install anaconda::python
 % conda install biopython
 % conda install bioconda::jellyfish
+% conda install anaconda::pandas
 ```
 
 ## Installation
@@ -87,6 +89,8 @@ Clone this repository to your local linux PC.
 | :---------: | :---------: | 
 | id | Plasmid id |
 | host_range | Predicted host ranges of each plasmid at different level |
+
+# Output example
 
 ## Contact
 Tao Feng - fengtaosmu@foxmail.com
