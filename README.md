@@ -11,7 +11,7 @@ Several machine learning-based tools have been developed to predict plasmid host
 Consequently, existing methods may significantly underestimate the host ranges of mobilizable plasmids. In this work, we propose a novel method named HRPredict, which employs a word vector model to digitally represent the encoded proteins on plasmid genomes.
 
 ## Citations
-Feng T, Chen X, Wu S, Tang W, Zhou H, Fang Z. "Predicting the bacterial host range of plasmid genomes using the language model-based one-class support vector machine algorithm. Microb Genom. 2025 Feb;11(2).
+Feng T, Chen X, Wu S, Tang W, Zhou H, Fang Z. Predicting the bacterial host range of plasmid genomes using the language model-based one-class support vector machine algorithm. Microb Genom. 2025 Feb;11(2).
 
 ## Requires
 + biopython >= 1.78
