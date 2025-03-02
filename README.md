@@ -1,6 +1,7 @@
 # Predicting the bacterial host range of plasmid genomes using the language model-based one-class SVM algorithm
 
 ## Change logs
+2025.03.02 The README.md was updated with a few modification.
 2025.02.10 The README.md was updated with a few modification.
 
 ## Introduction
@@ -99,7 +100,7 @@ Clone this repository to your local linux PC.
 | NZ_CP122477.1 | f__Enterobacteriaceae(1.01);g__Enterobacter(0.03);s__Enterobacter_hormaechei(-0.01)	f__Enterobacteriaceae(1.01);g__Salmonella(0.06);s__Salmonella_enterica(0.07)	f__Enterobacteriaceae(1.01);g__Shigella(0.02);s__Shigella_flexneri(0.01) |
 | NC_005970.1 | No species was predicted |
 
-Note: We trained a one-class SVM for each taxonomic unit to determine whether the taxon is within the host range of the input plasmid. The numbers in parentheses indicate the score of each SVM. The decision threshold for each SVM was selected based on the optimal Youden index (see the article for details), and the specific threshold values for individual SVMs are provided in the files located in the model folder.
+We trained a one-class SVM for each taxonomic unit to determine whether the taxon is within the host range of the input plasmid. The numbers in parentheses indicate the score of each SVM. The decision threshold for each SVM was selected based on the optimal Youden index (see the article for details), and the specific threshold values for individual SVMs are provided in the files located in the model folder.
 
 ## Contact
 Tao Feng - fengtaosmu@foxmail.com
