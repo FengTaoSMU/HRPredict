@@ -38,7 +38,7 @@ def accession_id_get(fasta, fa_dir):
                 if num != 0:
                     output.write(">%s\n%s\n" % (pid, seq))
                     output.close()
-                pid = line.strip().split()[0][1:]
+                pid = line.strip().split()[0][1:].replace("|","_")
                 plist.append(pid)
                 output = open("{}{}.fasta".format(fa_dir, pid), 'w')
                 seq = ''
@@ -117,7 +117,7 @@ def genebank_protein_dic_get(genebank, prot_vector):
 
 def prot_dist_calculate(plasmid_id, fasta, ref_prot_dic, prot_vec, tmp_dir):
     prokka_tmp = "{}{}".format(tmp_dir, plasmid_id)
-    prokka_run = "prokka {} --outdir {} --prefix {} --kingdom Bacteria".format(fasta, prokka_tmp, plasmid_id)
+    prokka_run = "prokka {} --outdir {} --prefix {} --kingdom Bacteria --centre A --compliant".format(fasta, prokka_tmp, plasmid_id)
     prokka_gb = "{}/{}.gbk".format(prokka_tmp, plasmid_id)
     os.system(prokka_run)
     if not os.path.getsize(prokka_gb):
@@ -161,6 +161,11 @@ def host_range_output(result_dic, output, prob_F, prob_G, prob_S, lineageF, line
     FP_df = pd.read_csv(prob_F, delimiter=',')
     GP_df = pd.read_csv(prob_G, delimiter=',')
     SP_df = pd.read_csv(prob_S, delimiter=',')
+
+    # Ensure indexes are always strings, to allow integer sequence IDs
+    FP_df.index = FP_df.index.astype(str)
+    GP_df.index = GP_df.index.astype(str)
+    SP_df.index = SP_df.index.astype(str)
 
     g_dic = {}
     for h_index in range(len(lineageG)):
